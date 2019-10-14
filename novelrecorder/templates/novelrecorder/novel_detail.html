@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+{% load rest_framework %}
+
+{% block content %}
+<h1>{{ novel.name }}</h1>
+<div class="master_novel">
+    <form action="{% url 'novelrecorder:novel_detail' pk=novel.pk %}" method="POST">
+        {% csrf_token %}
+        {% render_form serializer %}
+        {% include "widgets/submit_save.html" %}
+    </form>
+</div>
+<br>
+<div class="detail_character_list">
+    {% include "novelrecorder/character_list.html" with novel_id=novel.pk %}
+    <br>
+    <form action="{% url 'novelrecorder:character_detail_create' %}">
+        <input type="hidden" value="{{ novel.pk }}" name="novel_id">
+        {% include "widgets/submit_new.html" with data_name="Character" %}
+    </form>
+</div>
+{% endblock %}

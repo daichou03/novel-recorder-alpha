@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Novel Recorder Home Page</h1>
+  <p>The novel recorder has the following record counts:</p>
+  <p><i>Note: Not really the best information to show for an index page.</i></p>
+  <table>
+    <tr><td><strong>Novels</strong></td><td>{{ num_novels }}</td></tr>
+    <tr><td><strong>Characters</strong></td><td>{{ num_characters }}</td></tr>
+    <tr><td><strong>Descriptions</strong></td><td>{{ num_descriptions }}</td></tr>
+    <tr><td><strong>Relationships</strong></td><td>{{ num_relationships }}</td></tr>
+    <tr><td><strong>Authors</strong></td><td>{{ num_authors }}</td></tr>
+  </table>
+{% endblock %}

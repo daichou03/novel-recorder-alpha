@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% load rest_framework %}
+
+{% block content %}
+<h1>New Novel</h1>
+
+<form action="{% url 'novelrecorder:novel_detail_create' %}" method="POST">
+    {% csrf_token %}
+    {% render_form serializer %}
+    <input type="submit" value="Create">
+</form>
+{% endblock %}

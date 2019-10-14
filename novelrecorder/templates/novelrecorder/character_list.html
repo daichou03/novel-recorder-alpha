@@ -1,0 +1,16 @@
+{% block content %}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Primary Description Title</th>
+        <th>Primary Description Content</th>
+    </tr>
+    {% for character in serializer.context.characters %}
+    <tr>
+        <td><a href="{% url 'novelrecorder:character_detail' pk=character.pk %}">{{ character.name }}</a></td>
+        <td>{{ character.primary_description_title }}</td>
+        <td>{{ character.primary_description_content }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

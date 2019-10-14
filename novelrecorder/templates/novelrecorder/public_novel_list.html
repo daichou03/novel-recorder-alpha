@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>All public novels</h2>
+<br>
+<table>
+    <tr>
+        <th><b>Name</b></th>
+        <th><b>Author</b></th>
+    </tr>
+    {% for novel in public_novel_list %}
+    <tr>
+        <td><a href="{% url 'novelrecorder:novel_detail' pk=novel.id %}">{{ novel.name }}</a></td>
+        <td>{{ novel.author }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

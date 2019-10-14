@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% load rest_framework %}
+
+{% block content %}
+<div class="master_character">
+    <form action="{% url 'novelrecorder:character_detail' pk=character.pk %}" method="POST">
+        {% csrf_token %}
+        {% render_form serializer %}
+        {% include "widgets/submit_save.html" %}
+    </form>
+    <form action="{% url 'novelrecorder:character_detail_delete' pk=character.pk %}" method="POST" onSubmit="return confirm('Are you sure you wish to delete this Character?\nThis will also delete all Descriptions it has.')">
+        {% csrf_token %}
+        <input type="hidden" value="{{ character.novel.id }}" name="novel_id">
+        {% include "widgets/submit_delete.html" %}
+    </form>
+</div>
+<br>
+<div class="detail_description_list">
+    {% include "novelrecorder/description_list_character.html" with character_id=character.pk %}
+    <br>
+    <form action="{% url 'novelrecorder:description_detail_create' %}">
+        <input type="hidden" value="{{ character.pk }}" name="character_id">
+        {% include "widgets/submit_new.html" with data_name="Description" %}
+    </form>
+</div>
+<br>
+<div class="relationship_list">
+    {% include "novelrecorder/relationship_list.html" with character1_id=character.pk %}
+    <br>
+    <form action="{% url 'novelrecorder:relationship_detail_create' %}" id="relationship_detail_create_form">
+        <input type="hidden" value="{{ character.pk }}" name="character1_id">
+        {% include "widgets/submit_new.html" with data_name="Relationship" %}
+    </form>
+    {% if serializer.context.has_write_permission %}
+        With: <select name="character2_id" form="relationship_detail_create_form">
+        {% for character in serializer.context.charactersWithoutRelationship %}
+            <option value={{ character.pk }}>{{ character.name }}</option>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

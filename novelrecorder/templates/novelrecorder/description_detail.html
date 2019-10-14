@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% load rest_framework %}
+
+{% block content %}
+<form action="{% url 'novelrecorder:description_detail' pk=description.pk %}" method="POST">
+    {% csrf_token %}
+    {% render_form serializer %}
+    {% include "widgets/submit_save.html" %}
+</form>
+<form action="{% url 'novelrecorder:description_detail_delete' pk=description.pk %}" method="POST"  onSubmit="return confirm('Are you sure you wish to delete this Description?')">
+    {% csrf_token %}
+    <input type="hidden" value="{{ description.character.id }}" name="character_id">
+    {% include "widgets/submit_delete.html" %}
+</form>
+{% endblock %}

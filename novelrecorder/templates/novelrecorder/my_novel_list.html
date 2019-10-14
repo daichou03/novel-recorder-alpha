@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+
+{% load rest_framework %}
+
+{% block content %}
+
+<h2>My novels</h2>
+<br>
+<table>
+    <tr>
+        <th><b>Name</b></th>
+        <th><b>Author</b></th>
+        <th><b>Is Public?</b></th>
+    </tr>
+    {% for novel in novels %}
+    <tr>
+        <td><a href="{% url 'novelrecorder:novel_detail' pk=novel.id %}">{{ novel.name }}</a></td>
+        <td>{{ novel.author }}</td>
+        <td><input type="checkbox" {% if novel.is_public %} checked {% endif %} disabled></td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+<form action="{% url 'novelrecorder:novel_detail_create' %}">
+    {% include "widgets/submit_new.html" with data_name="Novel" %}
+</form>
+{% endblock %}

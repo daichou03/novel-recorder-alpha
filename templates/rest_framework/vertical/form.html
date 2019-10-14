@@ -1,0 +1,10 @@
+{% load rest_framework %}
+{% load yd_template_utils %}
+{% if form.safe_errors %}
+  {% for error in form.safe_errors|get_dict_item:"non_field_errors" %}
+    {{ error }}
+  {% endfor %}
+{% endif %}
+{% for field in form %}
+  {% render_field field style=style %}
+{% endfor %}

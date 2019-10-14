@@ -1,0 +1,16 @@
+{% block content %}
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+    </tr>
+    {% for description in serializer.context.descriptions %}
+    <tr>
+        <td>{% if forloop.first %}<b>{% endif %}
+            <a href="{% url 'novelrecorder:description_detail' pk=description.pk %}">{{ description.title }}</a>
+        {% if forloop.first %}</b>{% endif %}</td>
+        <td>{{ description.content }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

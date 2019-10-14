@@ -1,0 +1,18 @@
+{% block content %}
+<table>
+    <tr>
+        <th>Relationship</th>
+        <th>Object Character</th>
+        <th>Primary Description Title</th>
+        <th>Primary Description Content</th>
+    </tr>
+    {% for relationship in serializer.context.relationships %}
+    <tr>
+        <td><a href="{% url 'novelrecorder:relationship_detail' pk=relationship.pk %}">{{ relationship.relationship_display }}</a></td>
+        <td><a href="{% url 'novelrecorder:character_detail' pk=relationship.character2_id %}">{{ relationship.character2_name }}</a></td>
+        <td>{{ relationship.primary_description_title }}</td>
+        <td>{{ relationship.primary_description_content }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,19 @@
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+/* "Earthtone" and its variants */
+tr:nth-child(even){background-color: #e9e5e2;}
+tr:nth-child(odd){background-color: #d4ccc5;}
+
+tr:hover {
+  background-color: #816c5b;
+  color: white;
+}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #493829;
+  color: white;
+}

@@ -1,0 +1,18 @@
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+/* "Lunatic Time" colour theme */
+tr:nth-child(even){background-color: #ff8080;}
+tr:nth-child(odd){background-color: #80C0ff;}
+
+tr:hover {
+  background-color: #ffff80;
+}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #800080;
+  color: white;
+}

@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% load rest_framework %}
+
+{% block content %}
+<div class="master_relationship">
+    <form action="{% url 'novelrecorder:relationship_detail' pk=relationship.pk %}" method="POST">
+        {% csrf_token %}
+        {% render_form serializer %}
+        {% include "widgets/submit_save.html" %}
+    </form>
+    <form action="{% url 'novelrecorder:relationship_detail_delete' pk=relationship.pk %}" method="POST" onSubmit="return confirm('Are you sure you wish to delete this Relationship?\nThis will also delete all Descriptions it has.')">
+        {% csrf_token %}
+        <input type="hidden" value="{{ relationship.character1.id }}" name="character1_id">
+        {% include "widgets/submit_delete.html" %}
+    </form>
+</div>
+<br>
+<div class="detail_description_list">
+    {% include "novelrecorder/description_list_relationship.html" with relationship_id=relationship.pk %}
+    <br>
+    <form action="{% url 'novelrecorder:description_detail_create' %}">
+        <input type="hidden" value="{{ relationship.pk }}" name="relationship_id">
+        {% include "widgets/submit_new.html" with data_name="Description" %}
+    </form>
+</div>
+{% endblock %}
